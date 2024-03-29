@@ -7,11 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
 public class GamePanel extends JPanel implements Runnable{
-    public static final int WIDTH = 720;
-    public static final int HEIGHT = 480;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
     //FPS = 60
     final int FPS = 60;
     Thread gameThread;
+    PlayManager pm;
 
     public GamePanel(){
         this.setPreferredSize(new DimensionUIResource(WIDTH, HEIGHT));
