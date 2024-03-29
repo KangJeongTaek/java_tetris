@@ -3,6 +3,7 @@ package mino;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import main.KeyHandler;
 import main.PlayManager;
 
 public class Mino {
@@ -31,6 +32,12 @@ public class Mino {
             b[2].y += Block.SIZE;
             b[3].y += Block.SIZE;
             autoDropCounter = 0;
+        }
+        if(KeyHandler.leftPressed == true){
+            b[0].x += Block.SIZE;
+            b[1].x += Block.SIZE;
+            b[2].x += Block.SIZE;
+            b[3].x += Block.SIZE;
         }
     }
 

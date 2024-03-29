@@ -24,7 +24,7 @@ public class PlayManager {
     Mino currentMino;
     final int MINO_START_X;
     final int MINO_START_Y;
-
+    
     // 기타
     public static int dropInterval = 60; // 60프레임마다 떨어진다.
 
