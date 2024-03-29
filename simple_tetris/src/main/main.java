@@ -2,7 +2,7 @@ package main;
 
 import javax.swing.JFrame;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         JFrame window = new JFrame("Simple Tetris");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -17,5 +17,7 @@ public class main {
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        gp.launchGame();
     }
 }

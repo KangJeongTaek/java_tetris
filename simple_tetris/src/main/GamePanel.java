@@ -2,12 +2,13 @@ package main;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
 public class GamePanel extends JPanel implements Runnable{
-    public static final int WIDTH = 1280;
+    public static final int WIDTH = 1080;
     public static final int HEIGHT = 720;
     //FPS = 60
     final int FPS = 60;
@@ -18,6 +19,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setPreferredSize(new DimensionUIResource(WIDTH, HEIGHT));
         this.setBackground(Color.BLACK);
         this.setLayout(null);
+        pm = new PlayManager();
     }
     public void launchGame(){
         gameThread = new Thread(this);
@@ -33,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         while (gameThread != null){
             currentTime = System.nanoTime();
-            delta += (lastTime - currentTime) / drwaInterval;
+            delta += (currentTime - lastTime) / drwaInterval;
             lastTime = currentTime;
             if (delta>=1){
                 update();
@@ -43,10 +45,13 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     private void update(){
-
+        pm.update();
     }
-    private void paintCompenent(Graphics g){
+    public void paintComponent(Graphics g){
         super.paintComponent(g);
+
+        Graphics2D g2 = (Graphics2D)g;
+        pm.draw(g2);
     }
 
 }
