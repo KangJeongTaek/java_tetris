@@ -24,7 +24,17 @@ public class Mino {
     }
 
     public void setXY(int x, int y){}
-    public void updateXY(int direction){}
+    public void updateXY(int direction){
+        this.direction = direction;
+        b[0].x = tempB[0].x;
+        b[0].y = tempB[0].y;
+        b[1].x = tempB[1].x;
+        b[1].y = tempB[1].y;
+        b[2].x = tempB[2].x;
+        b[2].y = tempB[2].y;
+        b[3].x = tempB[3].x;
+        b[3].y = tempB[3].y;
+    }
     public void getDirection1(){}
     public void getDirection2(){}
     public void getDirection3(){}
@@ -32,7 +42,13 @@ public class Mino {
 
     public void update(){
         if(KeyHandler.upPressed){
-
+            switch(direction){
+                case 1: getDirection2();break;
+                case 2: getDirection3();break;
+                case 3: getDirection4();break;
+                case 4: getDirection1();break;
+            }
+            KeyHandler.upPressed = false;
         }
         if(KeyHandler.downPressed){
             b[0].y += Block.SIZE;
