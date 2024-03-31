@@ -9,6 +9,10 @@ import java.awt.RenderingHints;
 import mino.Block;
 import mino.Mino;
 import mino.Mino_L1;
+import mino.Mino_L2;
+import mino.Mino_Square;
+import mino.Mino_T;
+import mino.Mino_Z1;
 
 public class PlayManager {
 
@@ -38,7 +42,7 @@ public class PlayManager {
         MINO_START_Y = top_y + Block.SIZE;
 
         // 시작 테트 설정
-        currentMino = new Mino_L1();
+        currentMino = new Mino_Z1();
         currentMino.setXY(MINO_START_X, MINO_START_Y);
 
     }
