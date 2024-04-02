@@ -3,7 +3,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener{
 
-    public static boolean upPressed, downPressed, leftPressed, rightPressed,pausePressed;
+    public static boolean upPressed, downPressed, leftPressed, rightPressed,pausePressed,enterPressed;
     
     @Override
     public void keyTyped(KeyEvent e) {
@@ -31,6 +31,9 @@ public class KeyHandler implements KeyListener{
             }else{
                 pausePressed = true;
             }
+        }
+        if(code == KeyEvent.VK_ENTER){
+            enterPressed = true;
         }
     }
 

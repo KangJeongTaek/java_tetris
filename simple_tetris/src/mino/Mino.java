@@ -152,7 +152,17 @@ public class Mino {
             }
             KeyHandler.rightPressed = false;
         }
-
+        if(KeyHandler.enterPressed){
+            while(bottomCollision == false){
+                b[0].y += Block.SIZE;
+                b[1].y += Block.SIZE;
+                b[2].y += Block.SIZE;
+                b[3].y += Block.SIZE;
+                checkMovementCollision();
+                checkstaticBlockCollision();
+            }
+            KeyHandler.enterPressed = false;
+        }
         autoDropCounter++;
         if(bottomCollision){
             active = false;
