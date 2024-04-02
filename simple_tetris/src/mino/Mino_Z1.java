@@ -49,27 +49,13 @@ public class Mino_Z1 extends Mino{
     public void getDirection3(){
         //ㅇㅇ
         //  ㅇㅇ
-        tempB[0].x = b[0].x;
-        tempB[0].y = b[0].y;
-        tempB[1].x = b[0].x - Block.SIZE;
-        tempB[1].y = b[0].y;
-        tempB[2].x = b[0].x;
-        tempB[2].y = b[0].y + Block.SIZE;
-        tempB[3].x = b[0].x + Block.SIZE;
-        tempB[3].y = b[0].y + Block.SIZE;
+        getDirection1();
         updateXY(3);
     }
 
     public void getDirection4(){
     
-        tempB[0].x = b[0].x;
-        tempB[0].y = b[0].y;
-        tempB[1].x = b[0].x + Block.SIZE;
-        tempB[1].y = b[0].y;
-        tempB[2].x = b[0].x;
-        tempB[2].y = b[0].y + Block.SIZE;
-        tempB[3].x = b[0].x + Block.SIZE;
-        tempB[3].y = b[0].y - Block.SIZE;
+        getDirection2();
         updateXY(4);
     }
 }
