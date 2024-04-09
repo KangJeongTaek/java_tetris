@@ -13,6 +13,8 @@ public class Mino {
     public int direction = 1;
     boolean leftCollision, rightCollision, bottomCollision;
     public boolean active = true;
+    public boolean deactivating;
+    int deactivateCounter = 0;
 
     public void create(Color c){
         b[0] = new Block(c);
@@ -109,6 +111,9 @@ public class Mino {
         }
     }
     public void update(){
+        if(deactivating){
+            deactivating();
+        }
         if(KeyHandler.upPressed){
             switch(direction){
                 case 1: getDirection2();break;
@@ -160,12 +165,13 @@ public class Mino {
                 b[3].y += Block.SIZE;
                 checkMovementCollision();
                 checkstaticBlockCollision();
+                active = false;
             }
             KeyHandler.enterPressed = false;
         }
         autoDropCounter++;
         if(bottomCollision){
-            active = false;
+            deactivating = true;
         }else{
         if(autoDropCounter == PlayManager.dropInterval){
             b[0].y += Block.SIZE;
@@ -176,6 +182,19 @@ public class Mino {
             }
         }
     }
+    private void deactivating(){
+        deactivateCounter++;
+
+        if(deactivateCounter == 45){
+            deactivateCounter = 0;
+            checkMovementCollision();
+
+            if(bottomCollision){
+                active  = false;
+            }
+        }
+    }
+
     public void draw(Graphics2D g2){
         int margin = 2;
         g2.setColor(b[0].c);

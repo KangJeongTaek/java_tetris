@@ -39,6 +39,14 @@ public class PlayManager {
     // 기타
     public static int dropInterval = 60; // 60프레임마다 떨어진다.
 
+    //게임 오버
+    boolean gameOver;
+
+    // 효과
+    boolean effectCounteron;
+    int effetCounter;
+    ArrayList<Integer> effetY = new ArrayList<>();
+
     public PlayManager(){
         left_x = (GamePanel.WIDTH/2) - (WIDTH/2);
         right_x = left_x + WIDTH;
@@ -80,10 +88,49 @@ public class PlayManager {
             staticBlocks.add(currentMino.b[1]);
             staticBlocks.add(currentMino.b[2]);
             staticBlocks.add(currentMino.b[3]);
+            // 게임 오버 체크
+            if(currentMino.b[0].x == MINO_START_X && currentMino.b[0].y == MINO_START_Y){
+                gameOver = true;
+            }
+            currentMino.deactivating = false;
             currentMino = nextMino;
             currentMino.setXY(MINO_START_X, MINO_START_Y);
             nextMino = pickMino();
             nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
+            checkDel();
+        }
+    }
+    private void checkDel(){
+        int x = left_x;
+        int y = top_y;
+        int blockCount = 0;
+
+        while(x<right_x && y<bottom_y){
+            for(int i =0;i<staticBlocks.size();i++){
+                if(staticBlocks.get(i).x == x && staticBlocks.get(i).y == y){
+                    blockCount++;
+                }
+            }
+            x += Block.SIZE;
+            if(x == right_x){
+                if(blockCount == 12){
+                    effectCounteron = true;
+                    effetY.add(y);
+                    for(int i =staticBlocks.size() -1;i> -1;i--){
+                        if(staticBlocks.get(i).y == y){
+                            staticBlocks.remove(i);
+                        }
+                    }
+                    for(int i = 0;i< staticBlocks.size();i++){
+                        if(staticBlocks.get(i).y < y){
+                            staticBlocks.get(i).y += Block.SIZE;
+                        }
+                    }
+                }
+                blockCount = 0;
+                x = left_x;
+                y += Block.SIZE;
+            }
         }
     }
     public void draw(Graphics2D g2){
@@ -112,12 +159,46 @@ public class PlayManager {
         for(int i = 0;i <staticBlocks.size(); i++){
             staticBlocks.get(i).draw(g2);
         }
-        g2.setColor(Color.yellow);
+        // 이펙트 그리기
+        if(effectCounteron){
+            effetCounter++;
+            g2.setColor(Color.red);
+            for(int i =0;i<effetY.size();i++){
+                g2.fillRect(left_x, effetY.get(i), WIDTH, Block.SIZE);
+            }
+            if (effetCounter ==10){
+                effectCounteron = false;
+                effetCounter = 0;
+                effetY.clear();
+            }
+        }
+        g2.setColor(Color.WHITE);
         g2.setFont(g2.getFont().deriveFont(50f));
+        if(gameOver){
+            x = left_x + 25;
+            y = top_y + 320;
+            g2.drawString("Game Over", x, y);
+            g2.drawString("'R'etry",x+ 50,y+50);
+        }
         if(KeyHandler.pausePressed){
             x = left_x + 70;
             y = top_y + 320;
             g2.drawString("PAUSED", x, y);
         }
+        if(KeyHandler.retryPressed == true && gameOver == true){
+            for(int i = staticBlocks.size() -1 ; i> -1 ; i --){
+                staticBlocks.remove(i);
+            }
+            currentMino = pickMino();
+            currentMino.setXY(MINO_START_X, MINO_START_Y);
+            KeyHandler.retryPressed = false;
+            gameOver = false;
+        }
+
+        x = 35;
+        y = top_y + 10;
+        g2.setColor(Color.blue);
+        g2.setFont(new Font("Times new Roman",Font.ITALIC,30));
+        g2.drawString("KangJeongTaek", x, y);
     }
 }
