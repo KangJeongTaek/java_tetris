@@ -5,5 +5,5 @@
 - https://www.youtube.com/watch?v=N1ktYfszqnM&t=4564s
 
 ## 구동 영상
-
+<img src="https://raw.githubusercontent.com/KangJeongTaek/java_tetris/main/images/video01.gif" width="570px">
 
